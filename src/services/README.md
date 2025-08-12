@@ -1,16 +1,17 @@
 # Services Directory
 
-This directory contains service modules that handle external communication and business logic.
+This directory contains business logic services that are separate from routes and controllers.
 
-## Structure
+## Services
 
-- API communication services
-- External integrations
-- Complex business logic that doesn't belong in components
+- `AuthService.js` - Authentication and authorization logic
+- `TaskService.js` - Task management logic
+- `CategoryService.js` - Category management logic
+- `EmailService.js` - Email notification logic
 
 ## Best Practices
 
-1. Services should be modular and focused
-2. Use TypeScript interfaces for request/response types
-3. Implement proper error handling
-4. Services should be thoroughly tested
+1. Services should encapsulate complex business logic
+2. Keep services focused on specific domains
+3. Use dependency injection for better testability
+4. Implement proper error handling
