@@ -6,6 +6,15 @@ A simple yet powerful application for managing your tasks efficiently.
 
 The Todo List application is a task management solution designed to help users organize and track their tasks. It provides an intuitive interface for creating, updating, and managing tasks with various features like categories, priorities, due dates, and more.
 
+## Project Philosophy
+
+Our approach emphasizes:
+
+- **Quality over quantity**: We prioritize fewer, well-implemented features over many partial implementations
+- **Simple solutions**: We prefer straightforward, maintainable code over complex solutions
+- **Thorough testing**: Automated tests to prevent regressions and ensure reliability
+- **User-centered design**: All technical decisions prioritize the user experience
+
 ## Documentation
 
 - [Specification](./specification.md) - Detailed application requirements and features
@@ -62,22 +71,21 @@ Please refer to the [Development Guide](./development.md) for details on our dev
 ### Pull Request Process
 
 1. Create a branch from `main`
-2. Implement your changes with tests
-3. Submit a pull request with a detailed description
+2. Implement your changes with appropriate tests
+3. Submit a pull request with a clear description
 4. Ensure all checks pass
-5. Request code review
-6. Address feedback if any
-7. Merge when approved
+5. Address feedback if any
+6. Merge when approved
 
-## Features
+## MVP Features
 
+Our initial focus is on delivering these core features with high quality:
+
+- Basic user authentication (register, login, logout)
 - Task management (create, read, update, delete)
-- Task organization (lists, projects, tags)
-- Task properties (priority, due date, description)
-- User authentication and authorization
-- Responsive design for all devices
-- Offline capability
-- And much more!
+- Simple list organization
+- Core task properties (title, description, due date, priority)
+- Responsive design for desktop and mobile
 
 ## Contributing
 
