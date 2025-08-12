@@ -18,18 +18,20 @@ This document outlines the engineering principles and development practices for 
 ## Development Philosophy
 
 ### Core Principles
-1. **User-Centered Design**: Always prioritize user experience in technical decisions
-2. **Simplicity**: Prefer simple solutions over complex ones when possible
-3. **Maintainability**: Write code that's easy to understand, modify, and debug
-4. **Performance**: Optimize for speed and resource efficiency
-5. **Reliability**: Build systems that are robust and handle errors gracefully
-6. **Testability**: Design components to be easily testable
+1. **Quality Over Quantity**: Focus on fewer features with higher quality rather than many partially-implemented features
+2. **User-Centered Design**: Always prioritize user experience in technical decisions
+3. **Simplicity**: Prefer simple solutions over complex ones when possible
+4. **Maintainability**: Write code that's easy to understand, modify, and debug
+5. **Testability**: Design components to be easily testable with automated tests to prevent regressions
+6. **Performance**: Optimize for speed and resource efficiency
+7. **Reliability**: Build systems that are robust and handle errors gracefully
 
 ### Architectural Approach
 - Follow a **component-based architecture** with clear separation of concerns
 - Implement **clean architecture** principles to separate business logic from implementation details
-- Use **domain-driven design** for complex business rules
+- Start with **minimal complexity** for the MVP and add sophistication incrementally
 - Design for **horizontal scalability** from the beginning
+- Prefer **established patterns** over novel solutions for maintainability
 
 ## Code Organization
 
@@ -51,6 +53,7 @@ This document outlines the engineering principles and development practices for 
   /styles         # Global styles and themes
   /types          # TypeScript type definitions
   /utils          # Utility functions
+  /tests          # Test files (can also be co-located with components)
 ```
 
 ### Backend Structure
@@ -64,6 +67,7 @@ This document outlines the engineering principles and development practices for 
   /services       # Business logic services
   /utils          # Utility functions
   /validation     # Input validation schemas
+  /tests          # Test files
 ```
 
 ## Development Workflow
@@ -82,11 +86,16 @@ This document outlines the engineering principles and development practices for 
 
 3. **Pull Request Process**:
    - Create a branch from `main`
-   - Implement changes with proper tests
-   - Submit PR with detailed description
-   - Require at least one code review
+   - Implement changes with appropriate tests
+   - Submit PR with clear description
    - Ensure CI checks pass
    - Squash and merge to maintain clean history
+
+### MVP First Approach
+- Implement core features completely before moving to advanced features
+- Focus on a small set of features with high quality rather than many features with less quality
+- Ensure thorough testing of each feature before moving to the next
+- Get user feedback early and adapt accordingly
 
 ### Release Process
 1. **Versioning**:
@@ -95,7 +104,7 @@ This document outlines the engineering principles and development practices for 
    - Automate version bumping with CI
 
 2. **Release Cadence**:
-   - Regular releases every 2 weeks
+   - Regular releases when features are complete and tested
    - Critical bug fixes as needed
 
 3. **Change Documentation**:
@@ -110,6 +119,7 @@ This document outlines the engineering principles and development practices for 
 - Limit nesting to maximum 3 levels deep
 - Use early returns to reduce complexity
 - Avoid magic numbers and strings
+- Maintain consistency across the codebase
 
 ### JavaScript/TypeScript Standards
 - Use TypeScript for type safety
@@ -124,37 +134,40 @@ This document outlines the engineering principles and development practices for 
 - Follow a component-oriented styling approach
 - Implement design tokens for consistency
 - Use responsive design principles throughout
-- Follow BEM naming convention for any global CSS
+- Keep styles simple and maintainable
 
 ## Testing Strategy
 
-### Test Pyramid
-- **Unit Tests**: 70% coverage
+### Pragmatic Testing Approach
+- Focus on **preventing regressions** with automated tests
+- Prioritize **critical user flows** for thorough testing
+- Use appropriate test types for different scenarios
+- Automate tests to run in CI/CD pipeline
+- Don't focus on specific coverage percentages, but ensure critical paths are well-tested
+
+### Types of Tests
+- **Unit Tests**:
   - Test individual components and functions
   - Fast execution for quick feedback
   - Use Jest for JavaScript/TypeScript code
 
-- **Integration Tests**: 20% coverage
+- **Integration Tests**:
   - Test interaction between components
   - Focus on API integrations and data flow
   - Use React Testing Library for frontend
 
-- **End-to-End Tests**: 10% coverage
-  - Test complete user flows
+- **End-to-End Tests**:
+  - Test critical user journeys
   - Simulate real user behavior
   - Use Cypress for E2E testing
 
 ### Testing Best Practices
-- Write tests before or alongside code (TDD where appropriate)
+- Write tests alongside code implementation
 - Test behavior, not implementation details
 - Use meaningful test descriptions
 - Implement snapshot testing sparingly
 - Mock external dependencies
-
-### Code Coverage
-- Aim for at least 80% total code coverage
-- Enforce via CI/CD pipeline
-- Focus on critical paths for 100% coverage
+- Make tests deterministic and repeatable
 
 ## CI/CD Pipeline
 
@@ -162,16 +175,22 @@ This document outlines the engineering principles and development practices for 
 - Run on every pull request and merge to main
 - Automated build process
 - Run linting and code style checks
-- Execute all automated tests
+- Execute automated tests
 - Generate code coverage reports
-- Perform static code analysis
+- Perform basic static code analysis
 
 ### Continuous Deployment
 - Automated deployment to development environment
-- Manual approval for staging and production
+- Manual approval for production
 - Zero-downtime deployment strategy
 - Automatic rollback on failure
 - Post-deployment health checks
+
+### Minimal CI Requirements
+- Build must succeed
+- Linting passes
+- Critical tests pass
+- No security vulnerabilities in dependencies
 
 ## Documentation Guidelines
 
@@ -199,21 +218,20 @@ This document outlines the engineering principles and development practices for 
 - Optimize bundle size with tree shaking
 - Use memoization for expensive calculations
 - Implement virtualization for long lists
-- Optimize images and assets
-- Use performance monitoring tools
+- Start with performance best practices, optimize as needed
 
 ### Backend Performance
 - Implement appropriate caching strategies
 - Optimize database queries and indexes
 - Use connection pooling
 - Implement rate limiting
-- Consider using worker threads for CPU-intensive tasks
+- Start simple and optimize based on actual usage patterns
 
 ### Database Optimization
 - Create proper indexes for frequent queries
-- Implement database-level caching
+- Use database-level caching
 - Use database migrations for schema changes
-- Consider read replicas for scaling
+- Start with simple schema and evolve as needed
 
 ## Security Practices
 
